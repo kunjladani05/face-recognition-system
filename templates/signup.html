@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Signup</title>
+    <!-- Google Fonts: Poppins font is used for styling the page -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    {% load static %}
+    <!-- Custom CSS for the signup page -->
+    <link rel="stylesheet" href="{% static 'css/signup.css' %}">
+</head>
+<body>
+    <!-- Background and shape elements for the page's visual design -->
+    <div class="background">
+        <div class="shape"></div>
+        <div class="shape"></div>
+    </div>
+
+    <!-- Main container for the signup form and face recognition area -->
+    <div class="container">
+        <!-- Face scan area: Contains the visual components of face scanning -->
+        <div class="face-scan">
+            <div class="scan-area">
+                <!-- Scan line that could indicate the scanning process -->
+                <div class="scan-line"></div>
+                <!-- Icon that could represent the face being scanned -->
+                <div class="face-icon"></div>
+            </div>
+        </div>
+
+        <!-- The signup form -->
+        <form method="post">
+            {% csrf_token %}
+            <!-- Title of the signup form -->
+            <h3>Face Recognition Account</h3>
+
+            <!-- Displaying error messages if any are passed -->
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="error-message alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+
+            <!-- Input fields for username, email, and password -->
+            <div class="input-group">
+                <label for="username">Username</label>
+                <input type="text" placeholder="Choose a username" id="username" name="username" required>
+                <span class="input-icon username-icon"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="email">Email</label>
+                <input type="email" placeholder="Enter your email" id="email" name="email" required>
+                <span class="input-icon email-icon"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="password1">Password</label>
+                <input type="password" placeholder="Create password" id="password1" name="password1" required>
+                <span class="input-icon password-icon"></span>
+            </div>
+
+            <div class="input-group">
+                <label for="password2">Confirm Password</label>
+                <input type="password" placeholder="Confirm password" id="password2" name="password2" required>
+                <span class="input-icon password-icon"></span>
+            </div>
+
+            <!-- Submit button to create the account -->
+            <button type="submit">
+                <span>Create Account</span>
+                <div class="ripple"></div>
+            </button>
+
+            <!-- Link to the login page for users who already have an account -->
+            <div class="links">
+                <a href="{% url 'login' %}" class="login-link">Already have an account?</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

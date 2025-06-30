@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Face Recognition</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/live_recognition.css' %}">
+</head>
+<body>
+    {% include "navbar.html" %}
+
+    <div class="count-screen">
+        <div class="container">
+            <div class="recognition-box">
+                <h2>Live Face Recognition</h2>
+
+                <!-- Video Wrapper -->
+                <div class="video-wrapper">
+                    <video id="video" width="640" height="480" autoplay></video>
+                    <div class="scan-line"></div>
+                </div>
+
+                <!-- Button Group -->
+                <div class="button-group">
+                    <button onclick="capturePhoto()" class="scan-button">Scan Face</button>
+                    <button id="camera-button" class="stop-button">Start Camera</button>
+
+                    <form id="photoForm" method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <input type="hidden" name="captured_image" id="captured_image">
+                        <button type="submit" class="submit-button">Submit to Server</button>
+                    </form>
+                </div>
+
+                <!-- Display Captured Frame -->
+                {% if photo %}
+                <div class="result-section">
+                    <h3>Captured Frame:</h3>
+                    <img src="{{ photo }}" width="300" />
+                </div>
+                {% endif %}
+
+                <!-- Display Matched Profiles -->
+                {% if profiles %}
+                <div class="profile-section" id="profile-section">
+                    <h3>Matched Profiles:</h3>
+                    <div class="row">
+                        {% for profile in profiles %}
+                        <div class="profile-card">
+                            <img src="{{ profile.image.url }}" alt="Profile Image" width="200">
+                            <p><strong>Name:</strong> {{ profile.name }}</p>
+                            <p><strong>Email:</strong> {{ profile.email }}</p>
+                            <p><strong>Phone:</strong> {{ profile.phone_number }}</p>
+                            <p><strong>Address:</strong> {{ profile.address }}</p>
+                            <p><strong>DOB:</strong> {{ profile.date_of_birth }}</p>
+                            <p><strong>Age:</strong> {{ profile.age }}</p>
+                            <p><strong>Gender:</strong> {{ profile.gender }}</p>
+                            <p><strong>Height:</strong> {{ profile.height }}</p>
+                            <p><strong>Weight:</strong> {{ profile.weight }}</p>
+                        </div>
+
+                        {% if forloop.counter|divisibleby:2 %}
+                            </div><div class="row">
+                        {% endif %}
+                        {% endfor %}
+                    </div>
+                </div>
+                {% elif error %}
+                <p class="error-message">{{ error }}</p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+
+    <script src="{% static 'js/live_recognition.js' %}"></script>
+</body>
+
+</html>

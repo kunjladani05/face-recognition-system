@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Confirm Profile Deletion</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/profile_confirm_delete.css' %}">
+</head>
+<body>
+    {% block content %}
+    <!-- Heading for the profile deletion confirmation page -->
+    <h2>Confirm Profile Deletion</h2>
+
+    <!-- Confirmation message with the name of the profile being deleted -->
+    <p>Are you sure you want to delete "{{ object.name }}"?</p>
+
+    <!-- Form to confirm the deletion, using POST method to submit the request -->
+    <form method="POST">
+        <!-- CSRF token for security -->
+        {% csrf_token %}
+
+        <!-- Submit button to confirm deletion -->
+        <button type="submit">Confirm Delete</button>
+
+        <!-- Cancel button that redirects back to the profile list -->
+        <a href="{% url 'profile_list' %}">
+            <button type="button">Cancel</button>
+        </a>
+    </form>
+    {% endblock %}
+</body>
+
+</html>

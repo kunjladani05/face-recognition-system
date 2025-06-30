@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character encoding for the webpage -->
+    <meta charset="UTF-8">
+
+    <!-- Responsive design to ensure the page scales correctly on different devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Title of the page shown in the browser tab -->
+    <title>Create Profile</title>
+
+    <!-- Loading static files (CSS in this case) -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/create_profile.css' %}">
+</head>
+<body>
+
+    <!-- Main container for the form content -->
+    <div class="container">
+        <!-- Header for the page -->
+        <h1>Create New Profile</h1>
+
+        <!-- Profile creation form with POST method and file upload support -->
+        <form method="post" enctype="multipart/form-data" class="profile-form">
+
+            <!-- CSRF token for security to prevent cross-site request forgery -->
+            {% csrf_token %}
+
+            <!-- Loop over the form fields and render them with error handling -->
+            {% for field in form %}
+                <div class="form-group">
+                    <!-- Label for the field -->
+                    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+
+                    <!-- Render the form field itself -->
+                    {{ field }}
+
+                    <!-- Display errors related to the field, if any -->
+                    {% if field.errors %}
+                        <div class="error-message">{{ field.errors }}</div>
+                    {% endif %}
+                </div>
+            {% endfor %}
+
+            <!-- Additional Images field for uploading multiple files -->
+            <div class="form-group">
+                <label for="id_additional_images">Additional Images</label>
+                <!-- Input field allowing multiple file uploads -->
+                <input type="file" name="additional_images" id="id_additional_images" multiple>
+            </div>
+
+            <!-- Submit button to create the profile -->
+            <button type="submit" class="submit-btn">Create Profile</button>
+        </form>
+
+        <!-- Link to navigate back to the profile list page -->
+        <a href="{% url 'profile_list' %}" class="back-link">View All Profiles</a>
+    </div>
+
+</body>
+</html>

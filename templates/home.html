@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition System</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/home.css' %}">
+</head>
+<body>
+    {% include "navbar.html" %}
+    <!-- Includes a navbar from a separate HTML file (navbar.html). This can be reused across pages. -->
+
+    <div class="hero">
+        <!-- Hero section, typically a large banner at the top of the page with key message or visuals. -->
+        <div class="mesh-overlay"></div>
+        <!-- Mesh overlay adds a visual effect or background styling over the hero section. -->
+        <div class="content">
+            <!-- Contains the main content of the hero section -->
+            <h1>Face Recognition System</h1>
+            <!-- Main heading/title of the page, describing the core function of the system. -->
+            <p class="tagline">The Future of Biometric Security</p>
+            <!-- A brief tagline that highlights the key selling point of the face recognition system. -->
+        </div>
+    </div>
+
+    <main>
+        <!-- The main section of the page that contains the bulk of the content. -->
+        <section class="info-section">
+            <!-- Section describing general information about face recognition. -->
+            <h2>What is Face Recognition?</h2>
+            <!-- Subtitle for the section introducing face recognition technology. -->
+            <div class="info-grid">
+                <!-- A grid layout to display multiple information cards. -->
+                <div class="info-card">
+                    <!-- Individual information card. -->
+                    <div class="card-icon">🔍</div>
+                    <!-- Icon representing the concept of recognition or identification. -->
+                    <h3>Definition</h3>
+                    <!-- Card title providing a brief description of what face recognition is. -->
+                    <p>Face recognition is a biometric technology that uses unique facial features to identify or verify a person's identity using digital imaging.</p>
+                    <!-- Explanation of face recognition technology. -->
+                </div>
+                <div class="info-card">
+                    <!-- Another information card, this one explaining how the system works. -->
+                    <div class="card-icon">⚡</div>
+                    <h3>How it Works</h3>
+                    <p>The system analyzes facial features like distance between eyes, nose shape, and jawline to create a unique facial signature.</p>
+                    <!-- Explanation of the technology behind face recognition. -->
+                </div>
+                <div class="info-card">
+                    <!-- Another card describing the applications of the technology. -->
+                    <div class="card-icon">🎯</div>
+                    <h3>Applications</h3>
+                    <p>Used in security systems, mobile devices, law enforcement, and access control to provide secure and convenient authentication.</p>
+                    <!-- Explanation of where face recognition is applied in real-world scenarios. -->
+                </div>
+                <div class="info-card">
+                    <!-- Card highlighting the benefits of the technology. -->
+                    <div class="card-icon">✨</div>
+                    <h3>Benefits</h3>
+                    <p>Contactless, fast, and highly accurate identification method that's difficult to forge or manipulate.</p>
+                    <!-- Benefits such as speed, accuracy, and security in face recognition technology. -->
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <!-- Section detailing the key features of the face recognition system. -->
+            <h2>Key Features</h2>
+            <!-- Subtitle for the features section. -->
+            <div class="feature-list">
+                <!-- A list to display individual features of the system. -->
+                <div class="feature">
+                    <!-- A single feature displayed in its own section. -->
+                    <div class="feature-icon">🔒</div>
+                    <!-- Icon for security-related feature. -->
+                    <h3>Enhanced Security</h3>
+                    <p>Advanced encryption and liveness detection prevent spoofing attempts</p>
+                    <!-- Description of the security features, including encryption and anti-spoofing measures. -->
+                </div>
+                <div class="feature">
+                    <!-- Another feature displayed. -->
+                    <div class="feature-icon">⚡</div>
+                    <h3>Real-time Processing</h3>
+                    <p>Instant face detection and matching capabilities</p>
+                    <!-- Explains the real-time processing feature of the system. -->
+                </div>
+                <div class="feature">
+                    <!-- Another feature card. -->
+                    <div class="feature-icon">📱</div>
+                    <h3>Multi-platform</h3>
+                    <p>Works across various devices and operating systems</p>
+                    <!-- Describes the system's compatibility with different platforms. -->
+                </div>
+            </div>
+        </section>
+
+        <section class="use-cases">
+            <!-- Section describing practical use cases for the technology. -->
+            <h2>Use Cases</h2>
+            <!-- Subtitle for use cases section. -->
+            <div class="use-cases-grid">
+                <!-- Grid to display different use cases of the face recognition system. -->
+                <div class="use-case-card">
+                    <h3>Access Control</h3>
+                    <!-- Heading for the access control use case. -->
+                    <p>Secure building entry and restricted area access using facial recognition.</p>
+                    <!-- Description of access control use case, using facial recognition for security. -->
+                </div>
+                <div class="use-case-card">
+                    <h3>Time and Attendance</h3>
+                    <p>Automated employee time tracking and attendance management.</p>
+                    <!-- Description of how the system can be used for time tracking and attendance. -->
+                </div>
+                <div class="use-case-card">
+                    <h3>Security Surveillance</h3>
+                    <p>Real-time monitoring and threat detection in public spaces.</p>
+                    <!-- Describes how the system can be applied in security surveillance. -->
+                </div>
+                <div class="use-case-card">
+                    <h3>Mobile Authentication</h3>
+                    <p>Secure device unlocking and app authentication.</p>
+                    <!-- Explains the use of facial recognition in mobile device security. -->
+                </div>
+            </div>
+        </section>
+    </main>
+
+    {% load static %}
+    <script src="{% static 'js/home.js' %}"></script>
+    <!-- Links to an external JavaScript file (home.js) for interactivity or other front-end functionality. -->
+</body>
+
+</html>

@@ -1,0 +1,156 @@
+/* Modern color scheme and base styles */
+:root {
+  --primary-gradient: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
+  --secondary-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  --surface-color: #1e1b4b;
+  --header-bg: rgba(0, 0, 0, 0.3);
+}
+
+body {
+  background: var(--surface-color);
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+  min-height: 100vh;
+  color: white;
+}
+
+/* Animated header with glass effect */
+.bg-dark {
+  background: var(--header-bg) !important;
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  animation: slideDown 0.5s ease-out;
+}
+
+/* Container styling */
+.container-fluid {
+  padding: 2rem !important;
+}
+
+/* Button styling */
+.btn-primary {
+  background: var(--primary-gradient) !important;
+  border: none !important;
+  border-radius: 1rem !important;
+  padding: 2rem !important;
+  transition: all 0.3s ease !important;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 30px -10px rgba(79, 70, 229, 0.3);
+}
+
+.btn-primary:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: 0 20px 40px -15px rgba(79, 70, 229, 0.5);
+}
+
+/* Icon styling */
+.bi {
+  display: inline-block;
+  color: white !important;
+  text-decoration: none !important;
+  transition: transform 0.3s ease;
+}
+
+.btn:hover .bi {
+  transform: scale(1.1) rotate(5deg);
+}
+
+/* Shine effect on hover */
+.btn-primary::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.btn-primary:hover::after {
+  opacity: 1;
+  transform: rotate(45deg) translate(50%, 50%);
+}
+
+/* Grid layout improvements */
+.row {
+  margin: -1rem;
+}
+
+.col-lg-6,
+.col-md-6 {
+  padding: 1rem;
+}
+
+/* Animations */
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Apply fade-in animation to buttons */
+.btn-primary {
+  animation: fadeIn 0.5s ease-out forwards;
+}
+
+.col-lg-6:nth-child(1) .btn-primary {
+  animation-delay: 0.2s;
+}
+
+.col-lg-6:nth-child(2) .btn-primary {
+  animation-delay: 0.4s;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .container-fluid {
+    padding: 1rem !important;
+  }
+
+  .btn-primary {
+    padding: 1.5rem !important;
+  }
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--surface-color);
+}
+
+::-webkit-scrollbar-thumb {
+  background: #4f46e5;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #7c3aed;
+}

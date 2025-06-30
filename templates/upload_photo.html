@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Face Upload</title>
+  {% load static %}
+  <!-- Link to the custom CSS file for styling -->
+  <link rel="stylesheet" href="{% static 'css/upload_photo.css' %}">
+</head>
+<body>
+  <!-- Navbar inclusion -->
+  {% include "navbar.html" %}
+
+  <!-- Upload Form -->
+  <form id="upload-form" method="POST" enctype="multipart/form-data">
+    <h2>Upload a Face Image</h2>
+
+    <!-- CSRF token for form security -->
+    {% csrf_token %}
+
+    <!-- Upload Area -->
+    <div id="upload-area">
+      <div id="upload-content">
+        <p>Drag & drop an image here or click to upload</p>
+
+        <!-- File input (hidden for customization) -->
+        <input type="file" id="file-upload" name="photo" accept="image/*" hidden>
+
+        <!-- Custom button to trigger file input -->
+        <button type="button" class="btn" aria-label="Upload a file">Browse File</button>
+      </div>
+
+      <!-- Error message display (hidden initially) -->
+      <div id="error-message" style="display:none;">
+        <p></p>
+      </div>
+
+      <!-- Preview image (hidden initially) -->
+      <div id="preview-container" style="display:none;">
+        <img id="preview-image" alt="Preview Image">
+      </div>
+    </div>
+
+    <!-- Analyze button (hidden initially, appears after file is selected) -->
+    <button id="analyze-button" class="btn" type="submit" style="display:none;">Analyze</button>
+  </form>
+
+
+
+<!-- Profile match result display -->
+{% if matched_profiles %}
+  <div id="result" class="match-found animate-fade-in">
+    {% if photo_url %}
+      <h3>Uploaded Image with Detected Faces:</h3>
+      <img src="{{ photo_url }}" alt="Uploaded Image" style="max-width: 500px; height: auto;"/>
+    {% endif %}
+    <h3>Matched Profiles</h3>
+
+    {% for profile in matched_profiles %}
+      <div style="margin-bottom: 2rem; border-bottom: 1px solid #ccc; padding-bottom: 1rem;">
+        <img src="{{ profile.image.url }}" alt="Profile Image" width="200">
+        <p><strong>Name:</strong> {{ profile.name }}</p>
+        <p><strong>Email:</strong> {{ profile.email }}</p>
+        <p><strong>Phone:</strong> {{ profile.phone_number }}</p>
+        <p><strong>Address:</strong> {{ profile.address }}</p>
+        <p><strong>DOB:</strong> {{ profile.date_of_birth }}</p>
+        <p><strong>Age:</strong> {{ profile.age }}</p>
+        <p><strong>Gender:</strong> {{ profile.gender }}</p>
+        <p><strong>Height:</strong> {{ profile.height }}</p>
+        <p><strong>Weight:</strong> {{ profile.weight }}</p>
+      </div>
+    {% endfor %}
+  </div>
+
+{% elif error %}
+  <div id="result" class="error animate-fade-in">
+    <h3>Error</h3>
+    <p>{{ error }}</p>
+  </div>
+{% endif %}
+
+
+  <!-- JavaScript for handling file upload and preview -->
+  <script src="{% static 'js/upload_photo.js' %}"></script>
+</body>
+</html>

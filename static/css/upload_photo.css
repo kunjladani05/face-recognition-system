@@ -1,0 +1,257 @@
+/* Base styles */
+:root {
+  --primary-color: #4f46e5;
+  --primary-hover: #4338ca;
+  --gray-100: #f3f4f6;
+  --gray-200: #e5e7eb;
+  --gray-300: #d1d5db;
+  --gray-600: #4b5563;
+  --gray-800: #1f2937;
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: var(--gray-100);
+  color: var(--gray-800);
+  line-height: 1.5;
+  margin: 0;
+  padding: 20px;
+}
+
+/* Upload Form */
+#upload-form {
+  max-width: 600px;
+  margin: 4rem auto;
+  background: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: var(--shadow-lg);
+}
+
+#upload-form h2 {
+  margin: 0 0 1.5rem;
+  text-align: center;
+  font-size: 1.5rem;
+  color: var(--gray-800);
+}
+
+/* Upload Area */
+#upload-area {
+  border: 2px dashed var(--primary-color);
+  border-radius: 8px;
+  padding: 2rem;
+  text-align: center;
+  background-color: rgba(79, 70, 229, 0.05);
+  transition: all 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+#upload-area:hover,
+#upload-area.dragging {
+  background-color: rgba(79, 70, 229, 0.1);
+  border-color: var(--primary-hover);
+}
+
+#upload-content p {
+  margin-bottom: 1rem;
+  color: var(--gray-600);
+}
+
+/* Buttons */
+.btn {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-weight: 500;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1rem;
+}
+
+.btn:hover {
+  transform: translateY(-1px);
+}
+
+.btn:active {
+  transform: translateY(0);
+}
+
+button.btn {
+  background-color: var(--primary-color);
+  color: white;
+}
+
+button.btn:hover {
+  background-color: var(--primary-hover);
+}
+
+button.btn.secondary {
+  background-color: var(--gray-200);
+  color: var(--gray-800);
+}
+
+button.btn.secondary:hover {
+  background-color: var(--gray-300);
+}
+
+/* Preview */
+#preview-container {
+  margin-top: 1.5rem;
+  text-align: center;
+}
+
+#preview-image {
+  max-width: 100%;
+  max-height: 300px;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  object-fit: contain;
+}
+
+/* Error Message */
+#error-message {
+  color: #dc2626;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Result Section */
+#result {
+  margin: 4rem auto;
+
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  max-width: 600px;
+}
+
+#result h3 {
+  margin: 0 0 1rem;
+  font-size: 1.25rem;
+  color: var(--gray-800);
+}
+
+#result img {
+  display: block;
+  margin: 0 auto 1.5rem;
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+}
+
+#result p {
+  margin: 0.75rem 0;
+  color: var(--gray-600);
+}
+
+#result strong {
+  color: var(--gray-800);
+  font-weight: 600;
+}
+
+/* Match Found Section */
+#result.match-found {
+  background-color: #d1fad2; /* Light green background for match found */
+  border: 2px solid #22c55e; /* Green border */
+}
+
+#result.match-found h3 {
+  color: #16a34a; /* Darker green text for the header */
+}
+
+#result.match-found img {
+  border-color: #16a34a; /* Green border for the image */
+}
+
+#result.match-found p {
+  color: var(--gray-600);
+}
+
+#result.match-found strong {
+  color: #16a34a; /* Green text for labels */
+}
+
+/* Error Message */
+#error-message {
+  color: #dc2626;
+  margin-top: 1rem;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Error Result Section */
+#result.error {
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 2px solid #dc2626; /* Red border for error */
+}
+
+#result.error h3 {
+  color: #dc2626; /* Red text for error header */
+}
+
+#result.error p {
+  color: #dc2626; /* Red text for error message */
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
+
+/* Loading State */
+.analyzing {
+  position: relative;
+  opacity: 0.75;
+  cursor: wait;
+}
+
+.analyzing::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Responsive Design */
+@media (max-width: 640px) {
+  body {
+    padding: 1rem;
+  }
+
+  #upload-form {
+    margin: 1rem;
+    padding: 1rem;
+  }
+
+  #upload-area {
+    padding: 1rem;
+  }
+
+  .btn {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+}

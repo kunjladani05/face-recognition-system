@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Character encoding to properly handle special characters -->
+    <meta charset="UTF-8">
+
+    <!-- Ensure proper scaling of the page on mobile devices -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Page title that appears in the browser tab -->
+    <title>Admin Dashboard</title>
+
+    <!-- Fonts loaded from Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Bootstrap for responsive layout and styling -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom CSS for the dashboard's specific styling -->
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/dashboard.css' %}">
+</head>
+<body>
+    <!-- Main container for the dashboard -->
+    <div class="container-fluid p-0">
+
+        <!-- Header section with the title and user info -->
+        <header class="bg-dark text-white py-4 mb-4">
+            <div class="container">
+                <div class="d-flex justify-content-between align-items-center">
+                    <!-- Admin Dashboard title -->
+                    <h1 class="mb-0">Admin Dashboard</h1>
+
+                    <!-- User Info with welcome message and logout button -->
+                    <div class="user-info d-flex align-items-center">
+                        <span class="me-3">Welcome Admin, {{ request.user.username }}</span>
+                        <a href="{% url 'logout' %}" class="btn btn-outline-light btn-sm">Logout</a>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main content area for statistics, actions, and logs -->
+        <div class="container">
+
+            <!-- Stats Overview section -->
+            <div class="row mb-4">
+                <div class="col-md-4">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Users</h5>
+                            <h2 class="mb-0">{{ total_users }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-success text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Active Profiles</h5>
+                            <h2 class="mb-0">{{ active_profiles }}</h2>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card bg-info text-white">
+                        <div class="card-body">
+                            <h5 class="card-title">Total Recognitions</h5>
+                            <h2 class="mb-0">{{ total_recognitions }}</h2>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main action buttons for navigating to different sections -->
+            <div class="row g-4">
+                <div class="col-lg-6 col-md-6">
+                    <a href="{% url 'user_details' %}" class="text-decoration-none">
+                        <div class="btn btn-primary w-100 h-100 d-flex flex-column align-items-center justify-content-center py-5">
+                            <!-- User Management icon and description -->
+                            <i class="bi bi-people-fill mb-3" style="font-size: 3rem;"></i>
+                            <h3 class="mb-2">User Management</h3>
+                            <p class="mb-0 text-white-50">View and manage user accounts</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="col-lg-6 col-md-6">
+                    <a href="{% url 'profile_list' %}" class="text-decoration-none">
+                        <div class="btn btn-primary w-100 h-100 d-flex flex-column align-items-center justify-content-center py-5">
+                            <!-- Profile Management icon and description -->
+                            <i class="bi bi-person-badge-fill mb-3" style="font-size: 3rem;"></i>
+                            <h3 class="mb-2">Profile Management</h3>
+                            <p class="mb-0 text-white-50">Manage recognition profiles</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Recent activity log section with a table to display actions performed -->
+            <div class="row mt-5">
+                <div class="col-12">
+                    <div class="card bg-dark text-white">
+                        <div class="card-header">
+                            <h4 class="mb-0">Recent Activity</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-dark table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>User</th>
+                                            <th>Action</th>
+                                            <th>Details</th>
+                                            <th>Time</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <!-- Display recent activities if available -->
+                                        {% if recent_activities %}
+                                            {% for activity in recent_activities %}
+                                                <tr>
+                                                    <td>{{ activity.user.username }}</td>
+                                                    <td>{{ activity.action }}</td>
+                                                    <td>{{ activity.details|default:"-" }}</td>
+                                                    <td>{{ activity.timestamp|date:"d-m-Y H:i" }}</td>
+                                                </tr>
+                                            {% endfor %}
+                                        {% else %}
+                                            <tr>
+                                                <td colspan="4" class="text-center">No recent activity</td>
+                                            </tr>
+                                        {% endif %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Bootstrap JS (for functionality like modals and tooltips) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom JavaScript for handling tooltips -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            var tooltipTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="tooltip"]'))
+            var tooltipList = tooltipTriggerList.map(function (tooltipTriggerEl) {
+                return new bootstrap.Tooltip(tooltipTriggerEl)
+            })
+        });
+    </script>
+</body>
+</html>

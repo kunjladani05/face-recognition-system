@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- This defines the document type and sets the language of the webpage to English. -->
+<head>
+  <meta charset="UTF-8">
+  <!-- Sets the character encoding to UTF-8, which supports most characters and symbols. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- Ensures the page is responsive, adjusting the viewport based on the device width. -->
+
+  <!-- bootstrap link -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <!-- This links to the Bootstrap 5 CSS framework from a CDN, which provides styling for components like the navbar. -->
+
+  <title>Face Recognition System</title>
+  <!-- The title that will appear in the browser tab, describing the page. -->
+
+  {% load static %}
+  <!-- Django template tag that loads static files like CSS or JS. -->
+  <link rel="stylesheet" href="{% static 'css/dashboard_navbar.css' %}">
+  <!-- Links to a custom CSS file ('dashboard_navbar.css') using Django's static file handling. -->
+
+</head>
+
+<body>
+  <!-- The body of the webpage, where the content is placed. -->
+  <div class="container01">
+    <!-- Custom container class that wraps the navbar for styling purposes. -->
+    <nav class="navbar navbar-expand-lg fixed-top">
+      <!-- Navbar that is fixed at the top of the page and expands on larger screens. -->
+      <div class="container-fluid">
+        <!-- Bootstrap class to make the navbar content full-width. -->
+        <a class="navbar-brand" href="{% url 'home' %}">
+          <!-- The brand/logo link in the navbar, which redirects the user to the 'home' page. -->
+          <div class="logo-animation">FR</div>
+          <!-- This is the animated logo displayed in the navbar. 'FR' likely stands for 'Face Recognition'. -->
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <!-- A button for toggling the visibility of the navbar items on small screens (mobile). -->
+          <span class="navbar-toggler-icon"></span>
+          <!-- Icon shown in the toggle button (hamburger icon) for mobile navigation. -->
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <!-- The navbar items that collapse into a dropdown on smaller screens. -->
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <!-- List of navigation items aligned to the left. -->
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="{% url 'user_details' %}">User Details</a>
+              <!-- Navigation link to the 'user_details' page. The 'active' class indicates the current page. -->
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'profile_list' %}">Created Profile Details</a>
+              <!-- Navigation link to the 'profile_list' page, showing created profile details. -->
+            </li>
+          </ul>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+            <!-- List of items aligned to the right. -->
+            <li class="nav-item">
+              <span class="me-3" style="color: black;">Welcome, {{ request.user.username }}</span>
+              <!-- Shows the logged-in user's username dynamically. The text will change based on the current user. -->
+              <a class="btn btn-glow" href="{% url 'login' %}">Logout</a>
+              <!-- The 'Logout' button that directs the user to the login page, allowing them to log out. -->
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+  </div>
+</body>
+
+</html>

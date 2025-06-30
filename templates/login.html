@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Face Recognition Login</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <div class="background">
+        <!-- Background shapes for design purposes -->
+        <div class="shape"></div>
+        <!-- Additional shape for decoration -->
+        <div class="shape"></div>
+        <!-- Another shape for decoration -->
+    </div>
+
+    <div class="container">
+        <!-- Main container that holds the login form -->
+        <div class="face-scan">
+            <!-- Section for the face scan animation or icon -->
+            <div class="scan-area">
+                <!-- Container for the scan area -->
+                <div class="scan-line"></div>
+                <!-- Simulates the scan line that moves across the video feed -->
+                <div class="face-icon"></div>
+                <!-- Icon representing the face scan functionality -->
+            </div>
+        </div>
+
+        <form method="post">
+            <!-- The login form -->
+            {% csrf_token %}
+            <!-- CSRF token to prevent cross-site request forgery -->
+            <h3>Face Recognition Login</h3>
+            <!-- Heading for the login form -->
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="error-message alert-{{ message.tags }}">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+            <!-- Displays any messages (errors or success) passed from the server -->
+
+            {% if error_message %}
+            <div class="error">{{ error_message }}</div>
+            <!-- Displays a custom error message if present -->
+            {% endif %}
+
+            <div class="input-group">
+                <!-- Input group for username -->
+                <label for="username">Username</label>
+                <!-- Label for the username input -->
+                <input type="text" placeholder="Enter Username" id="username" name="username" required>
+                <!-- Input field for the username, marked as required -->
+                <span class="input-icon username-icon"></span>
+                <!-- Icon for username input field -->
+            </div>
+
+            <div class="input-group">
+                <!-- Input group for password -->
+                <label for="password">Password</label>
+                <!-- Label for the password input -->
+                <input type="password" placeholder="Password" id="password" name="pass" required>
+                <!-- Input field for password, marked as required -->
+                <span class="input-icon password-icon"></span>
+                <!-- Icon for password input field -->
+            </div>
+
+            <button type="submit">
+                <!-- Submit button for the form -->
+                <span>Authenticate</span>
+                <!-- Text on the button -->
+                <div class="ripple"></div>
+                <!-- Ripple effect that appears when the button is clicked -->
+            </button>
+
+            <div class="links">
+                <!-- Container for additional links -->
+                <a href="{% url 'signup' %}" class="signup-link">Create Account</a>
+                <!-- Link to the signup page for creating a new account -->
+            </div>
+        </form>
+    </div>
+</body>
+
+</html>
